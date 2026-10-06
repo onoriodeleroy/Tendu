@@ -1,189 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Tendu: We tend to it. Errands in Abuja</title>
-<style>
-  :root{--bg:#f4faf6;--surface:#fff;--ink:#0b2e1f;--muted:#4b6558;--green:#0f6b3a;--green-d:#0a4a29;--line:#cfe3d6;--tint:#e3f1e8;--on-green:#fff;
-  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08150e;--surface:#0f2218;--ink:#e8f4ec;--muted:#9bb8a7;--green:#2fae6a;--green-d:#5fd08e;--line:#1f3a2b;--tint:#12291d;--on-green:#04140a}}
-  :root[data-theme="dark"]{--bg:#08150e;--surface:#0f2218;--ink:#e8f4ec;--muted:#9bb8a7;--green:#2fae6a;--green-d:#5fd08e;--line:#1f3a2b;--tint:#12291d;--on-green:#04140a}
-  html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
-  *,*:before,*:after{box-sizing:inherit}
-  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Trebuchet MS","Segoe UI",system-ui,sans-serif}
-  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.12;margin:0 0 .5em;letter-spacing:-.01em}
-  h1{font-size:clamp(2.3rem,7vw,4rem)}h2{font-size:clamp(1.7rem,4.5vw,2.4rem)}h3{font-size:1.15rem;font-family:inherit;font-weight:700}
-  p{margin:0 0 1em}a{color:inherit}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-  section{padding:64px 0}
-  .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
-  .logo{font:800 1.5rem Georgia,serif;color:var(--green);letter-spacing:.02em;text-decoration:none}
-  .logo small{display:block;font:400 .72rem "Trebuchet MS",sans-serif;color:var(--muted);letter-spacing:0}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--green);cursor:pointer;font-size:1rem;font-family:inherit}
-  .btn.primary{background:var(--green);color:var(--on-green)}
-  .btn.ghost{background:transparent;color:var(--green)}
-  .btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--green-d);outline-offset:2px}
-  .hero{display:grid;gap:36px;grid-template-columns:1fr;padding-top:24px}
-  @media(min-width:860px){.hero{grid-template-columns:1.1fr .9fr;align-items:start}}
-  .hero h1 em{font-style:normal;color:var(--green)}
-  .lead{color:var(--muted);font-size:1.1rem;max-width:34em}
-  .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-  form{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
-  form h2{font-size:1.4rem}
-  label{display:block;font-weight:600;font-size:.92rem;margin:14px 0 6px}
-  input,select,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
-  textarea{min-height:90px;resize:vertical}
-  form .btn{width:100%;justify-content:center;margin-top:18px}
-  .note{font-size:.85rem;color:var(--muted);margin:10px 0 0}
-  .band{background:var(--tint)}
-  .services{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-  .svc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
-  .svc p{margin:0;color:var(--muted)}
-  .svc h3{margin-bottom:.3em}
-  .steps{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));counter-reset:s;padding:0;list-style:none}
-  .steps li{counter-increment:s;padding-left:58px;position:relative}
-  .steps li:before{content:counter(s);position:absolute;left:0;top:0;width:42px;height:42px;border-radius:50%;background:var(--green);color:var(--on-green);display:grid;place-items:center;font:700 1.2rem Georgia,serif}
-  .steps p{color:var(--muted);margin:0}
-  .trust{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-  .trust div{border-left:4px solid var(--green);padding-left:16px}
-  .trust p{color:var(--muted);margin:0}
-  .price{display:grid;gap:24px;grid-template-columns:1fr}
-  @media(min-width:860px){.price{grid-template-columns:1fr 1fr}}
-  .price ul{margin:0;padding-left:1.1em}.price li{margin-bottom:.6em}
-  .quote{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
-  details{border-bottom:1px solid var(--line);padding:14px 0}
-  summary{font-weight:700;cursor:pointer}
-  details p{margin:10px 0 0;color:var(--muted)}
-  .final{background:var(--green);color:var(--on-green);text-align:center;border-radius:22px;padding:48px 20px;margin-bottom:48px}
-  .final .btn{background:var(--on-green);color:var(--green-d);border-color:var(--on-green)}
-  .final p{opacity:.9}
-  footer{padding:0 0 32px;color:var(--muted);font-size:.9rem;text-align:center}
-  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Tendu: We tend to it. Errands in Abuja</title>
+    
+    <!-- SEO & Social Media Sharing Tags -->
+    <meta name="description" content="Trusted people in Abuja to shop, collect, inspect, queue, and deliver on your behalf.">
+    <meta property="og:title" content="Tendu: We tend to it. Errands in Abuja">
+    <meta property="og:description" content="Can't be there? We'll handle it. Trusted people in Abuja to run your errands.">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon Placeholder -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --bg:#f4faf6; --surface:#fff; --ink:#0b2e1f; --muted:#4b6558; 
+            --green:#0f6b3a; --green-d:#0a4a29; --line:#cfe3d6; --tint:#e3f1e8; --on-green:#fff;
+            box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)
+        }
+        
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --bg:#08150e; --surface:#0f2218; --ink:#e8f4ec; --muted:#9bb8a7; 
+                --green:#2fae6a; --green-d:#5fd08e; --line:#1f3a2b; --tint:#12291d; --on-green:#04140a
+            }
+        }
+        
+        :root[data-theme="dark"] {
+            --bg:#08150e; --surface:#0f2218; --ink:#e8f4ec; --muted:#9bb8a7; 
+            --green:#2fae6a; --green-d:#5fd08e; --line:#1f3a2b; --tint:#12291d; --on-green:#04140a
+        }
+        
+        html { scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth; }
+        *, *:before, *:after { box-sizing:inherit; }
+        body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.55 "Trebuchet MS","Segoe UI",system-ui,sans-serif; }
+        
+        h1, h2, h3 { font-family:Georgia,"Times New Roman",serif; line-height:1.12; margin:0 0 .5em; letter-spacing:-.01em; }
+        h1 { font-size:clamp(2.3rem,7vw,4rem); }
+        h2 { font-size:clamp(1.7rem,4.5vw,2.4rem); }
+        h3 { font-size:1.15rem; font-family:inherit; font-weight:700; }
+        p { margin:0 0 1em; }
+        a { color:inherit; text-decoration:none; }
+        
+        .wrap { max-width:1040px; margin:0 auto; padding:0 20px; }
+        section { padding:64px 0; }
+        .nav { display:flex; justify-content:space-between; align-items:center; padding:16px 0; }
+        
+        .logo { font:800 1.5rem Georgia,serif; color:var(--green); letter-spacing:.02em; }
+        .logo small { display:block; font:400 .72rem "Trebuchet MS",sans-serif; color:var(--muted); letter-spacing:0; }
+        
+        /* Improved Button Styles with Hover Effects */
+        .btn { 
+            display:inline-flex; align-items:center; gap:8px; padding:14px 22px; 
+            border-radius:999px; font-weight:700; border:2px solid var(--green); 
+            cursor:pointer; font-size:1rem; font-family:inherit; transition: all 0.2s ease;
+        }
+        .btn.primary { background:var(--green); color:var(--on-green); }
+        .btn.ghost { background:transparent; color:var(--green); }
+        
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(15, 107, 58, 0.2); }
+        .btn.primary:hover { background:var(--green-d); border-color:var(--green-d); }
+        .btn.ghost:hover { background:var(--tint); }
+        
+        .btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { 
+            outline:3px solid var(--green-d); outline-offset:2px; 
+        }
+        
+        .hero { display:grid; gap:36px; grid-template-columns:1fr; padding-top:24px; }
+        @media(min-width:860px) { .hero { grid-template-columns:1.1fr .9fr; align-items:start; } }
+        .hero h1 em { font-style:normal; color:var(--green); }
+        .lead { color:var(--muted); font-size:1.1rem; max-width:34em; }
+        .ctas { display:flex; flex-wrap:wrap; gap:12px; margin-top:20px; }
+        
+        form { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:24px; }
+        form h2 { font-size:1.4rem; }
+        label { display:block; font-weight:600; font-size:.92rem; margin:14px 0 6px; }
+        
+        /* Input Transitions */
+        input, select, textarea { 
+            width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--line); 
+            background:var(--bg); color:var(--ink); font:inherit; transition: border-color 0.2s ease;
+        }
+        input:hover, select:hover, textarea:hover { border-color: var(--green); }
+        textarea { min-height:90px; resize:vertical; }
+        form .btn { width:100%; justify-content:center; margin-top:18px; }
+        .note { font-size:.85rem; color:var(--muted); margin:10px 0 0; }
+        
+        .band { background:var(--tint); }
+        .services { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+        
+        /* Service Card Hover Effect */
+        .svc { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .svc:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.05); border-color: var(--green); }
+        .svc p { margin:0; color:var(--muted); }
+        .svc h3 { margin-bottom:.3em; }
+        
+        .steps { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); counter-reset:s; padding:0; list-style:none; }
+        .steps li { counter-increment:s; padding-left:58px; position:relative; }
+        .steps li:before { 
+            content:counter(s); position:absolute; left:0; top:0; width:42px; height:42px; 
+            border-radius:50%; background:var(--green); color:var(--on-green); 
+            display:grid; place-items:center; font:700 1.2rem Georgia,serif; 
+        }
+        .steps p { color:var(--muted); margin:0; }
+        
+        .trust { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); }
+        .trust div { border-left:4px solid var(--green); padding-left:16px; }
+        .trust p { color:var(--muted); margin:0; }
+        
+        .price { display:grid; gap:24px; grid-template-columns:1fr; }
+        @media(min-width:860px) { .price { grid-template-columns:1fr 1fr; } }
+        .price ul { margin:0; padding-left:1.1em; } 
+        .price li { margin-bottom:.6em; }
+        .quote { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px; }
+        
+        details { border-bottom:1px solid var(--line); padding:14px 0; }
+        summary { font-weight:700; cursor:pointer; outline: none; }
+        details p { margin:10px 0 0; color:var(--muted); }
+        
+        .final { background:var(--green); color:var(--on-green); text-align:center; border-radius:22px; padding:48px 20px; margin-bottom:48px; }
+        .final .btn { background:var(--on-green); color:var(--green-d); border-color:var(--on-green); }
+        .final .btn:hover { background:var(--surface); transform: translateY(-2px); }
+        .final p { opacity:.9; }
+        
+        footer { padding:0 0 32px; color:var(--muted); font-size:.9rem; text-align:center; }
+        
+        @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .btn, .svc { transition: none; } }
+    </style>
 </head>
 <body>
 <div class="wrap">
-  <header class="nav">
-    <a class="logo" href="#top">TENDU<small>We tend to it.</small></a>
-    <a class="btn ghost" href="#" data-wa>Chat on WhatsApp</a>
-  </header>
+    <header class="nav">
+        <a class="logo" href="#top">TENDU<small>We tend to it.</small></a>
+        <a class="btn ghost" href="#" data-wa>Chat on WhatsApp</a>
+    </header>
 
-  <main id="top">
-  <section class="hero">
-    <div>
-      <h1>Can’t be there? <em>We’ll handle it.</em></h1>
-      <p class="lead">Trusted people in Abuja to shop, collect, inspect, queue and deliver on your behalf.</p>
-      <div class="ctas">
-        <a class="btn primary" href="#" data-wa>Chat with Tendu on WhatsApp</a>
-        <a class="btn ghost" href="#request">Request an errand</a>
-      </div>
-    </div>
-    <form id="request">
-      <h2>Request an errand</h2>
-      <label for="name">Your name</label>
-      <input id="name" required autocomplete="name">
-      <label for="phone">Phone or WhatsApp number</label>
-      <input id="phone" type="tel" required autocomplete="tel">
-      <label for="type">What do you need?</label>
-      <select id="type">
-        <option>Shopping</option><option>Buy &amp; Verify</option><option>Document Runs</option>
-        <option>Pickups &amp; Delivery</option><option>Property Checks</option><option>Personal Assistance</option><option>Something else</option>
-      </select>
-      <label for="area">Where in Abuja?</label>
-      <input id="area" placeholder="e.g. Wuse 2, Gwarinpa, Lugbe">
-      <label for="details">Tell us what to do</label>
-      <textarea id="details" required placeholder="What should we get, check or deliver? Add timing if it matters."></textarea>
-      <button class="btn primary" type="submit">Send request on WhatsApp</button>
-      <p class="note">This opens WhatsApp with your request filled in. We reply with a quote before we start.</p>
-    </form>
-  </section>
-  </main>
-</div>
-
-<div class="band"><div class="wrap"><section id="services">
-  <h2>What we can do for you</h2>
-  <div class="services">
-    <div class="svc"><h3>Shopping</h3><p>Groceries from Wuse Market delivered to your door before dinner.</p></div>
-    <div class="svc"><h3>Buy &amp; Verify</h3><p>We check a second-hand phone or appliance in person before you pay for it.</p></div>
-    <div class="svc"><h3>Document runs</h3><p>Drop off, queue for and collect documents at offices so you don’t lose a day.</p></div>
-    <div class="svc"><h3>Pickups &amp; delivery</h3><p>Collect a parcel from one side of town and bring it to the other.</p></div>
-    <div class="svc"><h3>Property checks</h3><p>We visit your plot or flat, take photos and report what we see.</p></div>
-    <div class="svc"><h3>Personal assistance</h3><p>Pay a bill, book a service or follow up a task while you’re busy or abroad.</p></div>
-  </div>
-</section></div></div>
-
-<div class="wrap">
-  <section id="how">
-    <h2>How it works</h2>
-    <ol class="steps">
-      <li><h3>Tell us</h3><p>Message us on WhatsApp or fill the form. Say what you need and where.</p></li>
-      <li><h3>We do it</h3><p>A Tendu runner takes the errand on and keeps you updated as it moves.</p></li>
-      <li><h3>You get proof</h3><p>Photos, video and receipts show it’s done, so you never have to wonder.</p></li>
-    </ol>
-  </section>
-</div>
-
-<div class="band"><div class="wrap"><section id="trust">
-  <h2>People you can trust with your errands</h2>
-  <div class="trust">
-    <div><h3>Vetted runners</h3><p>Every Tendu runner is identified and checked before taking jobs, and wears the Tendu uniform.</p></div>
-    <div><h3>Photo and video proof</h3><p>You see the item, the receipt and the finished job, not just a “done.”</p></div>
-    <div><h3>Clear updates</h3><p>You hear from us at each stage on the chat you already use.</p></div>
-  </div>
-  <!-- Add testimonials here once you have them -->
-</section></div></div>
-
-<div class="wrap">
-  <section id="pricing">
-    <h2>How pricing works</h2>
-    <div class="price">
-      <div>
-        <p class="lead">No surprises. You see the full cost before we start, and you approve it.</p>
-        <ul>
-          <li><strong>Errand fee:</strong> based on the task, the time it takes and the distance.</li>
-          <li><strong>Item cost:</strong> what you ask us to buy is passed on at the price paid, with the receipt.</li>
-          <li><strong>Transport:</strong> included in your quote, not added later.</li>
-        </ul>
-      </div>
-      <div class="quote">
-        <h3>Get a quote in minutes</h3>
-        <p>Describe the errand and we’ll reply with one total. If it’s not right for you, you owe nothing.</p>
-        <a class="btn primary" href="#" data-wa>Ask for a quote</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq">
-    <h2>Questions people ask</h2>
-    <details><summary>Which areas do you cover?</summary><p>We work across Abuja. Tell us your location when you message and we’ll confirm we can reach it.</p></details>
-    <details><summary>How do I pay?</summary><p>We send a quote first. Once you approve it, we share payment details and start the errand.</p></details>
-    <details><summary>Can you buy things with my money?</summary><p>Yes. You send the item budget, we buy it, and you get the receipt and photos.</p></details>
-    <details><summary>How do I know the job was done?</summary><p>Every errand ends with photo or video proof and any receipts.</p></details>
-    <details><summary>Can I use Tendu if I live abroad?</summary><p>Yes. Many requests come from people who aren’t in Abuja, such as property checks and family errands.</p></details>
-  </section>
-
-  <div class="final">
-    <h2>Can’t be there? We’ll handle it.</h2>
-    <p>Tell us what you need and we’ll take it from there.</p>
-    <a class="btn" href="#" data-wa>Chat with Tendu on WhatsApp</a>
-  </div>
-  <footer>&copy; Tendu. We tend to it.</footer>
-</div>
-
-<script>
-// Replace with your WhatsApp number in international format, digits only (e.g. 2348012345678)
-var WA_NUMBER = "2349046411670";
-function wa(text){return "https://wa.me/"+WA_NUMBER+(text?"?text="+encodeURIComponent(text):"")}
-document.querySelectorAll("[data-wa]").forEach(function(a){
-  a.href=wa("Hi Tendu, I'd like help with an errand.");a.target="_blank";a.rel="noopener";
-});
-document.getElementById("request").addEventListener("submit",function(e){
-  e.preventDefault();
-  var v=function(id){return document.getElementById(id).value.trim()};
-  var msg="Hi Tendu, I'd like to request an errand.\n\nName: "+v("name")+"\nPhone: "+v("phone")+"\nType: "+v("type")+"\nArea: "+(v("area")||"-")+"\nDetails: "+v("details");
-  window.open(wa(msg),"_blank","noopener");
-});
-</script>
-</body>
-</html>
+    <main id="top">
+        <section class="hero">
+            <div>
+                <h1>Can’t be there? <em>We’ll handle it.</em></h1>
+                <p class="lead">Trusted people in Abuja to shop, collect, inspect, queue and deliver on your behalf.</p>
+                <div class="ctas">
+                    <a class="btn primary" href="#" data-wa>Chat with Tendu on WhatsApp</a>
+                    <a class="btn ghost" href="#request">Request an errand</a>
+                </div>
+            </div>
+            <form id="request">
+                <h2>Request an errand</h2>
+                <label for="name">Your name</label>
+                <!-- Added 'name' attribute for browser autofill -->
+                <input id="name" name="name" required autocomplete="name">
+                
+                <label for="phone">
